@@ -1,0 +1,9 @@
+<ion-list>
+  <ion-item *ngFor="let weekday of weekdays; let i = index">
+    <ion-label>{{weekday}}</ion-label>
+      <ion-radio (click)="setSelectedItem(i)"
+       checked="{{isWeekdaySame(weekday, i)}}"
+       value="{{weekday}}"
+       item-end></ion-radio>
+  </ion-item>
+</ion-list>
