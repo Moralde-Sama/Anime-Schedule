@@ -1,5 +1,5 @@
 {
-  "name": "Animalist",
+  "name": "animalist",
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "http://ionicframework.com/",
@@ -34,7 +34,6 @@
     "cordova-sqlite-storage": "^3.2.1",
     "ionic-angular": "3.9.5",
     "ionicons": "3.0.0",
-    "jikants": "^1.2.11",
     "moment": "^2.24.0",
     "rxjs": "5.5.11",
     "sw-toolbox": "3.6.0",

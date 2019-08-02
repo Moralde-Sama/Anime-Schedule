@@ -24,4 +24,8 @@ export class AnimeServiceProvider {
     return this.http.get(`https://api.jikan.moe/v3/season/${year}/${season.toLowerCase()}`,
      { observe: 'response' }).delay(4000);
   }
+
+  getAnimeMoreInfo(mal_id: number): Observable<Object> {
+    return this.http.get(`https://api.jikan.moe/v3/anime/${mal_id}/moreinfo`).delay(4000);
+  }
 }

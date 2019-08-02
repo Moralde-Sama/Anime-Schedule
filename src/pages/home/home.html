@@ -17,7 +17,7 @@
   <ion-grid fixed>
     <ion-row>
       <ion-col col-6 *ngFor="let anime of anime_list">
-        <ion-card class="home-card">
+        <ion-card class="home-card" (click)="showAnimeDetails(anime)">
           <img [src]="anime.image_url"/>
           <h5 class="type">{{anime.type}}</h5>
           <h5 class="score">{{anime.score || '0'}}</h5>

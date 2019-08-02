@@ -22,22 +22,26 @@ export class ListPage implements OnInit {
   }
 
   ngOnInit(): void {
-    type SeasonalAnime = {year: number, season: string, anime: Anime[] };
+    this.loader = this._loader();
+    setTimeout(() => {
+      type SeasonalAnime = {year: number, season: string, anime: Anime[] };
 
-    this.year = moment().year();
+      this.year = moment().year();
 
-    this._storage.get('seasonal_anime').then((value) => {
-      const parse_value: SeasonalAnime = JSON.parse(value);
-      const is_seasonal_not_same: boolean = 
-        value == null ? true : parse_value.year != this.year
-        && parse_value.season != 'Summer' ? true : false;
+      this._storage.get('seasonal_anime').then((value) => {
+        const parse_value: SeasonalAnime = JSON.parse(value);
+        const is_seasonal_not_same: boolean = 
+          value == null ? true : parse_value.year != this.year
+          && parse_value.season != 'Summer' ? true : false;
 
-      if(value == null || value == undefined || is_seasonal_not_same) {
-        this._getSeasonalAnime(this.year, 'Summer');
-      } else {
-        this.anime_list = parse_value.anime.filter((f) => f.score != null);
-      }
-    });
+        if(value == null || value == undefined || is_seasonal_not_same) {
+          this._getSeasonalAnime(this.year, 'Summer');
+        } else {
+          this.anime_list = parse_value.anime.filter((f) => f.score != null);
+        }
+        this.loader.dismiss();
+      });
+    }, 500);
   }
 
   private _getSeasonalAnime(year: number, season: string): void {
