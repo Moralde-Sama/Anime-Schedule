@@ -1,0 +1,11 @@
+
+.tab-selected {
+    ion-icon {
+        transition: color .5s;
+        color: var(--ion-color-primary);
+    }
+    ion-label {
+        transition: color .5s;
+        color: var(--ion-color-primary);
+    }
+}

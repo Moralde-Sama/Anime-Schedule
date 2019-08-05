@@ -1,0 +1,7 @@
+{
+  "name": "Anime-Schedule-init",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

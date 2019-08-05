@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{weekday_show}} Schedule</ion-title>
+    <ion-buttons slot="end">
+        <ion-menu-button autoHide="false" (click)="showPicker()">
+            <ion-icon name="calendar"></ion-icon>
+        </ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="6" *ngFor="let anime of anime_list">
+        <ion-card class="home-card" (click)="showAnimeDetails(anime)">
+          <img [src]="anime.image_url"/>
+          <h5 class="type">{{anime.type}}</h5>
+          <h5 class="score">{{anime.score}}</h5>
+          <h3>{{anime.title}}
+            <span *ngFor="let producer of anime.producers">
+              {{producer.name}}
+            </span>
+          </h3>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
