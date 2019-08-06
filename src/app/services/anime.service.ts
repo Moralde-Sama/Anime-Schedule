@@ -19,6 +19,16 @@ export class AnimeService {
     });
   }
 
+  async getAnimeDetails(mal_id: number): Promise<any> {
+    return new Promise((resolved) => {
+      setTimeout(() => {
+        this.http.get(`https://api.jikan.moe/v3/anime/${mal_id}/`).subscribe(result => {
+        resolved(result);
+      });
+      }, 4000);
+    });
+  }
+
   getSeasonalAnime(year: number, season: string): Observable<Object> {
     return this.http.get(`https://api.jikan.moe/v3/season/${year}/${season.toLowerCase()}`,
      { observe: 'response' });

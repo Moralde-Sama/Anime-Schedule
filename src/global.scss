@@ -28,7 +28,15 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap');
 
 html, body, ion-title {
-    font-family: 'Roboto Mono', monospace !important;
+    font-weight: 700;
+}
+
+
+
+hr {
+    height: 2px;
+    box-sizing: content-box;
+    background-color: var(--ion-color-primary);
 }
 
 ion-content {

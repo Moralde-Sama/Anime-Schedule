@@ -1,0 +1,144 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>Anime Details</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="12">
+          <div class="text-container">
+            <h4 class="title">{{anime_details.title}}</h4>
+          </div>
+        </ion-col>
+        <ion-col class="anime-image" size="12">
+          <ion-img [src]="anime_details.image_url"></ion-img>
+        </ion-col>
+        <ion-col size="12">
+            <ion-segment (ionChange)="segmentChanged($event)" scrollable="true">
+                <ion-segment-button checked="true" value="Information">
+                  <ion-label>Information</ion-label>
+                </ion-segment-button>
+                <ion-segment-button value="Statistics">
+                  <ion-label>Statistics</ion-label>
+                </ion-segment-button>
+                <ion-segment-button value="Trailer">
+                  <ion-label>Trailer</ion-label>
+                </ion-segment-button>
+                <ion-segment-button value="CVA">
+                  <ion-label>Characters & Voice Actors</ion-label>
+                </ion-segment-button>
+                <ion-segment-button value="Staff">
+                  <ion-label>Staff</ion-label>
+                </ion-segment-button>
+                <ion-segment-button value="OPED">
+                  <ion-label>Opening and Ending Theme</ion-label>
+                </ion-segment-button>
+              </ion-segment>
+        </ion-col>
+        <ion-col size="12">
+            <div class="section-container">
+                <h5 class="section-title">Type</h5>
+                <p class="section-description">
+                  {{anime_details.type}}
+                </p>
+            </div>
+        </ion-col>
+        <ion-col size="12">
+            <div class="section-container">
+                <h5 class="section-title">Episodes</h5>
+                <p class="section-description">
+                  {{anime_details.episodes}} Episode/s
+                </p>
+            </div>
+        </ion-col>
+        <ion-col size="12">
+            <div class="section-container">
+                <h5 class="section-title">Status</h5>
+                <p class="section-description">
+                  {{anime_details.status}}
+                </p>
+            </div>
+        </ion-col>
+        <ion-col size="12">
+          <div class="section-container">
+              <h5 class="section-title">Synopsis</h5>
+              <p class="section-description">
+                {{anime_details.synopsis}}
+              </p>
+          </div>
+        </ion-col>
+        <ion-col size="12">
+            <div class="section-container">
+                <h5 class="section-title">Genres</h5>
+                <div class="section-genres">
+                    <ion-chip color="primary" *ngFor="let genre of anime_details.genres">
+                        <ion-label>{{genre.name}}</ion-label>
+                    </ion-chip>
+                </div>
+            </div>
+        </ion-col>
+        <ion-col size="12">
+            <div class="section-container">
+                <h5 class="section-title">Aired</h5>
+                <p class="section-description">
+                  {{anime_details.aired.string}}
+                </p>
+            </div>
+        </ion-col>
+        <ion-col size="12">
+            <div class="section-container">
+                <h5 class="section-title">Premiered</h5>
+                <p class="section-description">
+                  {{anime_details.premiered}}
+                </p>
+            </div>
+        </ion-col>
+        <ion-col size="12">
+            <div class="section-container">
+                <h5 class="section-title">Broadcast</h5>
+                <p class="section-description">
+                  {{anime_details.broadcast}}
+                </p>
+            </div>
+        </ion-col>
+        <ion-col size="12">
+            <div class="section-container">
+                <h5 class="section-title">Source</h5>
+                <p class="section-description">
+                    {{anime_details.source || 'Unknown'}}
+                </p>
+            </div>
+        </ion-col>
+        <ion-col size="12">
+            <div class="section-container">
+                <h5 class="section-title">Duration</h5>
+                <p class="section-description">
+                  {{anime_details.duration}}
+                </p>
+            </div>
+        </ion-col>
+        <ion-col size="12">
+            <div class="section-container">
+                <h5 class="section-title">Rating</h5>
+                <p class="section-description">
+                    <ion-chip
+                      color="{{getRatingColor(anime_details.rating)}}">
+                      <ion-label>{{anime_details.rating}}</ion-label>
+                    </ion-chip>
+                </p>
+            </div>
+        </ion-col>
+        <ion-col size="12">
+            <ion-button expand="block" fill="outline" (click)="viewOnMal(anime_details.url)">
+              View on MAL
+            </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+</ion-content>
+

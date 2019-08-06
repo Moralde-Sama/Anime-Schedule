@@ -9,6 +9,7 @@ import { SchedulePage } from './schedule.page';
 import { HttpClientModule } from '@angular/common/http';
 import { AnimeService } from '../services/anime.service';
 import { IonicStorageModule } from '@ionic/storage';
+import { DetailsModalComponent } from './details-modal/details-modal.component';
 
 const routes: Routes = [
   {
@@ -26,7 +27,13 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     IonicStorageModule.forRoot()
   ],
-  declarations: [SchedulePage],
+  entryComponents: [
+    DetailsModalComponent
+  ],
+  declarations: [
+    SchedulePage,
+    DetailsModalComponent
+  ],
   providers: [
     AnimeService
   ]

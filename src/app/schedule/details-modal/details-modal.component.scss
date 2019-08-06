@@ -1,0 +1,52 @@
+@mixin font-style {
+    font-family: 'Roboto Mono', monospace;
+}
+@mixin title {
+    letter-spacing: 2px;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.anime-image {
+    display: flex;
+    justify-content: center;
+    ion-img {
+        background-color: var(--ion-color-primary);
+        padding: .1rem;
+        border-radius: .3rem;
+        box-shadow: 2px 2px 2px rgba(0,0,0,.2);
+        width: 50%;
+        height: 99%;
+    }
+}
+
+.text-container {
+    @include font-style;
+    text-align: center;
+
+    .title {
+        @include title;
+    }
+}
+
+.section-container {
+    @include font-style;
+    text-align: left;
+    
+    .section-title {
+        @include title;
+        margin: 0 .8rem;
+    }
+
+    .section-description {
+        font-weight: 500;
+        letter-spacing: .1rem;
+        text-align: center;
+        padding: 0 1rem;
+        max-height: 10rem;
+        overflow: auto;
+    }
+    .section-genres {
+        margin-top: .9rem;
+    }
+}
