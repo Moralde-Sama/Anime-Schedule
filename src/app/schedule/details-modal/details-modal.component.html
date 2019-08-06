@@ -16,7 +16,7 @@
           </div>
         </ion-col>
         <ion-col class="anime-image" size="12">
-          <ion-img [src]="anime_details.image_url"></ion-img>
+          <img [src]="anime_details.image_url"/>
         </ion-col>
         <ion-col size="12">
             <ion-segment (ionChange)="segmentChanged($event)" scrollable="true">

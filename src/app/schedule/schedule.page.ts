@@ -82,8 +82,8 @@ export class SchedulePage implements OnInit {
       anime_filtered = value == null ? [] : value.filter((f) => f.mal_id == mal_id);
       if(anime_filtered.length == 0) {
         const result = await this.anime_service.getAnimeDetails(mal_id);
-        anime_filtered.push(result);
-        await this.storage.set('anime_details_history', anime_filtered);
+        value.push(result);
+        this.storage.set('anime_details_history', value);
         anime = result;
         console.log('adding');
       } else {
