@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AnimeService } from '../services/anime.service';
 import { IonicStorageModule } from '@ionic/storage';
 import { DetailsModalComponent } from './details-modal/details-modal.component';
+import { InformationComponent } from './details-modal/information/information.component';
 
 const routes: Routes = [
   {
@@ -28,11 +29,13 @@ const routes: Routes = [
     IonicStorageModule.forRoot()
   ],
   entryComponents: [
-    DetailsModalComponent
+    DetailsModalComponent,
+    InformationComponent
   ],
   declarations: [
     SchedulePage,
-    DetailsModalComponent
+    DetailsModalComponent,
+    InformationComponent
   ],
   providers: [
     AnimeService

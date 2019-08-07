@@ -1,0 +1,32 @@
+@mixin font-style {
+    font-family: 'Roboto Mono', monospace;
+}
+@mixin title {
+    letter-spacing: 2px;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.section-container {
+    @include font-style;
+    text-align: left;
+    
+    .section-title {
+        @include title;
+        margin: 0 .8rem;
+    }
+
+    .section-description {
+        font-weight: 500;
+        letter-spacing: .1rem;
+        text-align: center;
+        padding: 0 1rem;
+        max-height: 10rem;
+        overflow: auto;
+        margin: 1em 0 0 0;
+    }
+    .section-group {
+        margin-top: .9rem;
+        text-align: center;
+    }
+}

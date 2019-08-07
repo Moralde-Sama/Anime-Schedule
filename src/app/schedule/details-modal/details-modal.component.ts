@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavParams, ModalController, LoadingController } from '@ionic/angular';
 import { Anime } from 'src/app/classes/anime';
 
@@ -7,19 +7,19 @@ import { Anime } from 'src/app/classes/anime';
   templateUrl: './details-modal.component.html',
   styleUrls: ['./details-modal.component.scss'],
 })
-export class DetailsModalComponent {
+export class DetailsModalComponent implements OnInit {
 
   anime_details: Anime;
+  anime_details_input: string;
   loading: HTMLIonLoadingElement
   constructor(private nav_params: NavParams, private modal_ctrl: ModalController,
-    private loader: LoadingController) { }
-    
-  async ionViewWillEnter() {
-    this.loading = await this._presentLoading();
-  }
-  async ionViewDidEnter() {
-    this.anime_details = this.nav_params.get('anime');
-    this.loading.dismiss();
+    private loader: LoadingController) { 
+      this.anime_details = this.nav_params.get('anime');
+      this.anime_details_input = JSON.stringify(this.nav_params.get('anime'));
+      console.log(this.anime_details);
+    }
+
+  async ngOnInit() {
   }
 
   viewOnMal(link: string): void {
@@ -32,11 +32,6 @@ export class DetailsModalComponent {
 
   segmentChanged(ev: any) {
     console.log('Segment changed');
-  }
-
-  getRatingColor(rating_text: string): string {
-    return (rating_text == 'PG-13 - Teens 13 or older' || rating_text == 'PG - Children') 
-        ? 'success': 'warning';
   }
 
   private async _presentLoading() {

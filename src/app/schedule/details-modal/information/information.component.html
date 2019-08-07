@@ -1,0 +1,126 @@
+<ion-col size="12">
+  <div class="section-container">
+      <h5 class="section-title">Type</h5>
+      <p class="section-description">
+        {{anime_details.type}}
+      </p>
+  </div>
+</ion-col>
+<ion-col size="12">
+  <div class="section-container">
+      <h5 class="section-title">Episodes</h5>
+      <p class="section-description">
+        {{anime_details.episodes}} Episode/s
+      </p>
+  </div>
+</ion-col>
+<ion-col size="12">
+  <div class="section-container">
+      <h5 class="section-title">Status</h5>
+      <p class="section-description">
+        {{anime_details.status}}
+      </p>
+  </div>
+</ion-col>
+<ion-col size="12">
+<div class="section-container">
+    <h5 class="section-title">Synopsis</h5>
+    <p class="section-description">
+      {{anime_details.synopsis}}
+    </p>
+</div>
+</ion-col>
+<ion-col size="12">
+  <div class="section-container">
+      <h5 class="section-title">Genres</h5>
+      <div class="section-group">
+          <ion-chip color="primary" *ngFor="let genre of anime_details.genres">
+              <ion-label>{{genre.name}}</ion-label>
+          </ion-chip>
+      </div>
+  </div>
+</ion-col>
+<ion-col size="12">
+  <div class="section-container">
+      <h5 class="section-title">Aired</h5>
+      <p class="section-description">
+        {{anime_details.aired.string}}
+      </p>
+  </div>
+</ion-col>
+<ion-col size="12">
+  <div class="section-container">
+      <h5 class="section-title">Premiered</h5>
+      <p class="section-description">
+        {{anime_details.premiered}}
+      </p>
+  </div>
+</ion-col>
+<ion-col size="12">
+  <div class="section-container">
+      <h5 class="section-title">Broadcast</h5>
+      <p class="section-description">
+        {{anime_details.broadcast}}
+      </p>
+  </div>
+</ion-col>
+<ion-col size="12" *ngIf="anime_details.producers.length > 0">
+<div class="section-container">
+    <h5 class="section-title">Producers</h5>
+    <div class="section-group">
+      <ion-chip color="primary" (click)="expression"
+       *ngFor="let producer of anime_details.producers">
+        <ion-label>{{producer.name}}</ion-label>
+      </ion-chip>
+    </div>
+</div>
+</ion-col>
+<ion-col size="12" *ngIf="anime_details.licensors.length > 0">
+<div class="section-container">
+    <h5 class="section-title">Licensor</h5>
+    <div class="section-group">
+      <ion-chip color="primary" (click)="expression"
+      *ngFor="let licensor of anime_details.licensors">
+        <ion-label>{{licensor.name}}</ion-label>
+      </ion-chip>
+    </div>
+</div>
+</ion-col>
+<ion-col size="12" *ngIf="anime_details.studios.length > 0">
+<div class="section-container">
+    <h5 class="section-title">Studios</h5>
+    <div class="section-group">
+      <ion-chip color="primary" (click)="expression"
+      *ngFor="let studio of anime_details.studios">
+        <ion-label>{{studio.name}}</ion-label>
+      </ion-chip>
+    </div>
+</div>
+</ion-col>
+<ion-col size="12">
+  <div class="section-container">
+      <h5 class="section-title">Source</h5>
+      <p class="section-description">
+          {{anime_details.source || 'Unknown'}}
+      </p>
+  </div>
+</ion-col>
+<ion-col size="12">
+  <div class="section-container">
+      <h5 class="section-title">Duration</h5>
+      <p class="section-description">
+        {{anime_details.duration}}
+      </p>
+  </div>
+</ion-col>
+<ion-col size="12">
+  <div class="section-container">
+      <h5 class="section-title">Rating</h5>
+      <p class="section-description">
+          <ion-chip
+            color="{{getRatingColor(anime_details.rating)}}">
+            <ion-label>{{anime_details.rating}}</ion-label>
+          </ion-chip>
+      </p>
+  </div>
+</ion-col>

@@ -5,7 +5,7 @@ export class Anime {
     continuing: boolean;
     image_url: string;
     kids: boolean;
-    licensor: Object[];
+    licensors: Object[];
     mal_id: number;
     members: number;
     producers: Producers[];

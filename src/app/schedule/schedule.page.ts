@@ -79,6 +79,7 @@ export class SchedulePage implements OnInit {
     let anime: Anime;
     let anime_filtered: Anime[];
     this.storage.get('anime_details_history').then(async (value: Anime[]) => {
+      value = value == null ? [] : value;
       anime_filtered = value == null ? [] : value.filter((f) => f.mal_id == mal_id);
       if(anime_filtered.length == 0) {
         const result = await this.anime_service.getAnimeDetails(mal_id);
