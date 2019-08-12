@@ -37,9 +37,16 @@ export class Anime {
     studios: Object[];
     opening_themes: string[];
     ending_themes: string[];
+    videos: AnimeVideos[];
+    characters: AnimeCharacters;
+    staff: AnimeStaff;
 }
 
-
+export class AnimeVideos {
+    title: string;
+    image_url: string;
+    video_url: string;
+}
 
 export class Producers {
     mal_id: number;
@@ -55,7 +62,37 @@ export class Genres {
     url: string;
 }
 
+export class AnimeCharacters {
+    mal_id: number;
+    url: string;
+    image_url: string;
+    name: string;
+    role: string;
+    voice_actors: AnimeVoiceActors[];
+}
+
+export class AnimeVoiceActors {
+    mal_id: number;
+    name: string;
+    url: string;
+    image_url: string;
+    language: string;
+}
+
+export class AnimeStaff {
+    mal_id: string;
+    url: string;
+    name: string;
+    image_url: string;
+    position: string[];
+}
+
 export type TodayRelease = {
     weekday: string,
     anime: Anime[] 
 }
+
+export type CharactersAndStaff = {
+    characters: AnimeCharacters,
+    staff: AnimeStaff
+};

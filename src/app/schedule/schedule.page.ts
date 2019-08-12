@@ -34,7 +34,7 @@ export class SchedulePage implements OnInit {
 
     const loader = await this.presentLoading();
     await this.initTodayRelease(async () => {
-      loader.dismiss();
+      await loader.dismiss();
     });
   }
 

@@ -1,12 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AnimeService {
 
+  private _pending_request: Subscription;
   constructor(private http: HttpClient) { }
 
   async getAnimeBySchedule(weekday: string): Promise<any> {
@@ -36,5 +38,35 @@ export class AnimeService {
 
   getAnimeMoreInfo(mal_id: number): Observable<Object> {
     return this.http.get(`https://api.jikan.moe/v3/anime/${mal_id}/moreinfo`);
+  }
+
+  getAnimeVideos(mal_id: number): Promise<any> {
+    return new Promise((resolve) => {
+      this._pending_request = this.http.get(`https://api.jikan.moe/v3/anime/${mal_id}/videos/`)
+      .pipe(delay(4000))
+      .subscribe(value => {
+          resolve(value['promo']);
+          this._pending_request.unsubscribe();
+        });
+    });
+  }
+
+  getAnimeCharacters(mal_id: number): Promise<any> {
+    return new Promise((resolve) => {
+      this._pending_request = this.http.get(`https://api.jikan.moe/v3/anime/${mal_id}/characters_staff/`)
+        .pipe(delay(4000))
+        .subscribe(value => {
+          resolve({
+            characters: value['characters'],
+            staff: value['staff']
+          });
+          this._pending_request.unsubscribe();
+        });
+    });
+  }
+
+  cancelPendingRequest(): void {
+    if(this._pending_request != undefined)
+      this._pending_request.unsubscribe();
   }
 }

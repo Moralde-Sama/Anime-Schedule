@@ -26,8 +26,8 @@
                 <ion-segment-button value="Statistics">
                   <ion-label>Statistics</ion-label>
                 </ion-segment-button>
-                <ion-segment-button value="Trailer">
-                  <ion-label>Trailer</ion-label>
+                <ion-segment-button value="Videos">
+                  <ion-label>Videos</ion-label>
                 </ion-segment-button>
                 <ion-segment-button value="CVA">
                   <ion-label>Characters & Voice Actors</ion-label>
@@ -40,7 +40,28 @@
                 </ion-segment-button>
               </ion-segment>
         </ion-col>
-        <app-information [animedetails]="anime_details_input"></app-information>
+        <app-information 
+          *ngIf="isSegmentSelected('Information')"
+          [animedetails]="anime_details_input">
+        </app-information>
+        <app-statistics
+          *ngIf="isSegmentSelected('Statistics')"
+          [animedetails]="anime_details_input">
+        </app-statistics>
+        <app-videos
+          *ngIf="isSegmentSelected('Videos')"
+          [animedetails]="anime_details_input"
+          (addedVideos)="onAddedVideos($event)">
+        </app-videos>
+        <app-op-ed-theme
+          *ngIf="isSegmentSelected('OPED')"
+          [animedetails]="anime_details_input">
+        </app-op-ed-theme>
+        <app-characters
+          *ngIf="isSegmentSelected('CVA')"
+          [animedetails]="anime_details_input"
+          (animecharacters)="onAddedAnimeChar($event)">
+        </app-characters>
         <ion-col size="12">
             <ion-button expand="block" fill="outline" (click)="viewOnMal(anime_details.url)">
               View on MAL

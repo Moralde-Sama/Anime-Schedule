@@ -1,0 +1,13 @@
+<ion-col size="12" *ngFor="let video of anime_details.videos">
+    <div class="section-container">
+        <h5 class="section-title">{{video.title}}</h5>
+        <p class="section-description">
+            <img [src]="video.image_url" alt="{{video.title}} video"/>
+        </p>
+    </div>
+</ion-col>
+<ion-col size="12" [hidden]="anime_details.videos">
+    <div text-center>
+        <ion-spinner name="lines" color="secondary"></ion-spinner>
+    </div>
+</ion-col>

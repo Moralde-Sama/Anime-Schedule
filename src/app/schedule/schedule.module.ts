@@ -11,6 +11,13 @@ import { AnimeService } from '../services/anime.service';
 import { IonicStorageModule } from '@ionic/storage';
 import { DetailsModalComponent } from './details-modal/details-modal.component';
 import { InformationComponent } from './details-modal/information/information.component';
+import { StatisticsComponent } from './details-modal/statistics/statistics.component';
+import { VideosComponent } from './details-modal/videos/videos.component';
+import { SafeVideoPipe } from '../pipe/safevideo.pipe';
+import { OpEdThemeComponent } from './details-modal/op-ed-theme/op-ed-theme.component';
+import { CharactersComponent } from './details-modal/characters/characters.component';
+import { CharacterListComponent } from './details-modal/characters/character-list/character-list.component';
+import { VoiceActorComponent } from './details-modal/characters/voice-actor/voice-actor.component';
 
 const routes: Routes = [
   {
@@ -30,12 +37,25 @@ const routes: Routes = [
   ],
   entryComponents: [
     DetailsModalComponent,
-    InformationComponent
+    InformationComponent,
+    StatisticsComponent,
+    VideosComponent,
+    OpEdThemeComponent,
+    CharactersComponent,
+    CharacterListComponent,
+    VoiceActorComponent
   ],
   declarations: [
     SchedulePage,
     DetailsModalComponent,
-    InformationComponent
+    InformationComponent,
+    StatisticsComponent,
+    VideosComponent,
+    SafeVideoPipe,
+    OpEdThemeComponent,
+    CharactersComponent,
+    CharacterListComponent,
+    VoiceActorComponent
   ],
   providers: [
     AnimeService

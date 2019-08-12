@@ -1,0 +1,16 @@
+<ion-list>
+  <ng-container *ngFor="let character of animecharacters">
+      <ion-item *ngIf="isVoiceActorExist(character.voice_actors)">
+          <ng-container *ngFor="let voice_actor of character.voice_actors">
+              <ion-avatar slot="start">
+                  <img [src]="voice_actor.image_url">
+                </ion-avatar>
+                <ion-label>
+                  <h2>{{voice_actor.name}}</h2>
+                  <h3>{{voice_actor.language}}</h3>
+                  <p>{{character.name}}</p>
+                </ion-label>
+          </ng-container>
+        </ion-item>
+  </ng-container>
+</ion-list>

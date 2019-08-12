@@ -8,7 +8,6 @@ import { Anime } from 'src/app/classes/anime';
 })
 export class InformationComponent implements OnInit {
   @Input() animedetails: string;
-  @Input('test') tests: string;
   anime_details: Anime;
   constructor() {
   }

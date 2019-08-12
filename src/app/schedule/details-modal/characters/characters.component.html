@@ -1,0 +1,25 @@
+<ion-col size="12">
+    <ion-segment (ionChange)="segmentChanged($event)">
+        <ion-segment-button checked="true" value="Characters">
+            <ion-label>Characters</ion-label>
+         </ion-segment-button>
+         <ion-segment-button value="VA">
+            <ion-label>Voice Actors</ion-label>
+         </ion-segment-button>
+    </ion-segment>
+</ion-col>
+<ion-col size="12">
+    <app-character-list
+        *ngIf="isSegmentSelected('Characters')"
+        [animecharacters]="anime_details.characters">
+    </app-character-list>
+    <app-voice-actor
+        *ngIf="isSegmentSelected('VA')"
+        [animecharacters]="anime_details.characters">
+    </app-voice-actor>
+</ion-col>
+<ion-col size="12" [hidden]="anime_details.characters">
+    <div text-center>
+        <ion-spinner name="lines" color="secondary"></ion-spinner>
+    </div>
+</ion-col>
