@@ -51,11 +51,6 @@ ion-content {
     font-weight: bold;
 }
 
-ion-label {
-    @include font-style;
-    letter-spacing: 2px;
-}
-
 .section-container {
     @include font-style;
     text-align: left;
