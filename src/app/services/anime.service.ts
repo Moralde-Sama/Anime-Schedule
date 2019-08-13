@@ -31,9 +31,16 @@ export class AnimeService {
     });
   }
 
-  getSeasonalAnime(year: number, season: string): Observable<Object> {
-    return this.http.get(`https://api.jikan.moe/v3/season/${year}/${season.toLowerCase()}`,
-     { observe: 'response' });
+  async getSeasonalAnime(year: number, season: string): Promise<any> {
+    return new Promise((resolve) => {
+      this._pending_request =
+       this.http.get(`https://api.jikan.moe/v3/season/${year}/${season.toLowerCase()}`)
+       .pipe(delay(4000))
+       .subscribe(value => {
+          resolve(value['anime']);
+          this._pending_request.unsubscribe();
+       });
+    });
   }
 
   getAnimeMoreInfo(mal_id: number): Observable<Object> {

@@ -99,6 +99,12 @@ export type TodayRelease = {
     anime: Anime[] 
 }
 
+export type CurrentSeason = {
+    year: number;
+    season: string;
+    anime_list: Anime[];
+}
+
 export type CharactersAndStaff = {
     characters: AnimeCharacters,
     staff: AnimeStaff
