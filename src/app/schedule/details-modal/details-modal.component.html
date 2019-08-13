@@ -62,6 +62,10 @@
           [animedetails]="anime_details_input"
           (animecharacters)="onAddedAnimeChar($event)">
         </app-characters>
+        <app-staff
+          *ngIf="isSegmentSelected('Staff')"
+          [animedetails]="anime_details">
+        </app-staff>
         <ion-col size="12">
             <ion-button expand="block" fill="outline" (click)="viewOnMal(anime_details.url)">
               View on MAL

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { LoadingController, PickerController, ModalController } from '@ionic/angular';
+import { LoadingController, PickerController, ModalController, Platform } from '@ionic/angular';
 import { AnimeService } from '../services/anime.service'
 import { Anime, TodayRelease } from '../classes/anime';
 import * as moment from 'moment';
 import { DayTypeNum, WeekDays } from '../classes/enum/date';
 import { DetailsModalComponent } from './details-modal/details-modal.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-schedule',
@@ -20,9 +21,10 @@ export class SchedulePage implements OnInit {
   current_weekday: string;
   _isoweekday: number;
   parsed_value_trelease: TodayRelease;
-  constructor(private anime_service: AnimeService, private storage: Storage,
-    private loader: LoadingController, private picker_ctrl: PickerController,
-    private modal_ctrl: ModalController) { }
+  backbutton_sub: Subscription;
+  constructor(public anime_service: AnimeService, public storage: Storage,
+    public loader: LoadingController, public picker_ctrl: PickerController,
+    public modal_ctrl: ModalController, public platform: Platform) { }
 
   async ngOnInit() {
     this._isoweekday = moment().isoWeekday();
@@ -36,6 +38,12 @@ export class SchedulePage implements OnInit {
     await this.initTodayRelease(async () => {
       await loader.dismiss();
     });
+
+    this._initBackButton();
+  }
+
+  ngOnDestroy(): void {
+    this.backbutton_sub.unsubscribe();
   }
 
   async initTodayRelease(callback): Promise<void> {
@@ -94,11 +102,14 @@ export class SchedulePage implements OnInit {
 
       await loader.dismiss();
 
-      const modal = await this.modal_ctrl.create({
-        component: DetailsModalComponent,
-        componentProps: {anime: anime}
-      });
-      await modal.present();
+      this.backbutton_sub.unsubscribe();
+
+      const modal = await this._createModal(anime);
+
+      if(await modal.onDidDismiss()) {
+        this._initBackButton();
+      }
+      
     });
   }
 
@@ -133,6 +144,15 @@ export class SchedulePage implements OnInit {
     await picker.present();
   }
 
+  private async _createModal(anime: Anime) {
+    const modal = await this.modal_ctrl.create({
+      component: DetailsModalComponent,
+      componentProps: {anime: anime}
+    });
+    await modal.present();
+    return modal;
+  }
+
   private _getPickerColumns() {
     const column = [];
     for(let weekday of WeekDays()) {
@@ -142,6 +162,13 @@ export class SchedulePage implements OnInit {
       });
     }
     return column;
+  }
+
+  private _initBackButton(): void {
+    console.log('backbutton init');
+    this.backbutton_sub = this.platform.backButton.subscribe(() => {
+      navigator['app'].exitApp();
+    });
   }
 
 }

@@ -18,6 +18,7 @@ import { OpEdThemeComponent } from './details-modal/op-ed-theme/op-ed-theme.comp
 import { CharactersComponent } from './details-modal/characters/characters.component';
 import { CharacterListComponent } from './details-modal/characters/character-list/character-list.component';
 import { VoiceActorComponent } from './details-modal/characters/voice-actor/voice-actor.component';
+import { StaffComponent } from './details-modal/staff/staff.component';
 
 const routes: Routes = [
   {
@@ -43,7 +44,8 @@ const routes: Routes = [
     OpEdThemeComponent,
     CharactersComponent,
     CharacterListComponent,
-    VoiceActorComponent
+    VoiceActorComponent,
+    StaffComponent
   ],
   declarations: [
     SchedulePage,
@@ -55,7 +57,8 @@ const routes: Routes = [
     OpEdThemeComponent,
     CharactersComponent,
     CharacterListComponent,
-    VoiceActorComponent
+    VoiceActorComponent,
+    StaffComponent
   ],
   providers: [
     AnimeService

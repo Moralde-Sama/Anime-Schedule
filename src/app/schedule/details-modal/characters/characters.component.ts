@@ -24,6 +24,7 @@ export class CharactersComponent implements OnInit {
        await this.anime_service.getAnimeCharacters(this.anime_details.mal_id);
       this.anime_details.characters = characters_and_staff.characters;
       this.anime_details.staff = characters_and_staff.staff;
+      console.log(characters_and_staff);
       await this._updateAnimeDetails(this.anime_details);
       await this.animecharacters.emit(characters_and_staff);
     }
@@ -34,7 +35,6 @@ export class CharactersComponent implements OnInit {
   }
 
   segmentChanged(ev: any): void {
-    console.log(ev['detail']['value']);
     this.selected_segment = ev['detail']['value'];
   }
 

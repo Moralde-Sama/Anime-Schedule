@@ -1,4 +1,4 @@
-<ion-list>
+<ion-list [hidden]="animecharacters">
   <ng-container *ngFor="let character of animecharacters">
       <ion-item *ngIf="isVoiceActorExist(character.voice_actors)">
           <ng-container *ngFor="let voice_actor of character.voice_actors">
