@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AnimeService } from 'src/app/services/anime.service';
 import { Anime, AnimeVideos } from 'src/app/classes/anime';
 import { Storage } from '@ionic/storage';
+import { ModalController } from '@ionic/angular';
+import { ViewVideoComponent } from './view-video/view-video.component';
 
 @Component({
   selector: 'app-videos',
@@ -14,7 +16,8 @@ export class VideosComponent implements OnInit {
   @Input() animedetails: string;
   @Output() addedVideos = new EventEmitter<AnimeVideos[]>(true);
   anime_details: Anime;
-  constructor(public anime_service: AnimeService, public storage: Storage) { 
+  constructor(public anime_service: AnimeService, public storage: Storage,
+    public modalCtrl: ModalController) { 
   }
 
   async ngOnInit() {
@@ -28,6 +31,15 @@ export class VideosComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.anime_service.cancelPendingRequest();
+  }
+
+  async showVideo(video_url: string, video_title: string): Promise<void> {
+    const modal = await this.modalCtrl.create({
+      component: ViewVideoComponent,
+      componentProps: {video_url: video_url, video_title: video_title}
+    });
+
+    await modal.present();
   }
 
   private async _updateAnimeDetails(animedetails: Anime): Promise<void> {

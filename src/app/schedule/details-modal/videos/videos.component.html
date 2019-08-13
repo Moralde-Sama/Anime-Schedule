@@ -1,9 +1,14 @@
 <ion-col size="12" *ngFor="let video of anime_details.videos">
     <div class="section-container">
         <h5 class="section-title">{{video.title}}</h5>
-        <p class="section-description">
+        <div class="section-description">
             <img [src]="video.image_url" alt="{{video.title}} video"/>
-        </p>
+            <div class="play-container">
+                <ion-button color="danger" (click)="showVideo(video.video_url, video.title)">
+                    <ion-icon name="play"></ion-icon>
+                </ion-button>
+            </div>
+        </div>
     </div>
 </ion-col>
 <ion-col size="12" [hidden]="anime_details.videos">

@@ -21,6 +21,7 @@ import { VoiceActorComponent } from './details-modal/characters/voice-actor/voic
 import { StaffComponent } from './details-modal/staff/staff.component';
 import { RelatedAnimeComponent } from './details-modal/related-anime/related-anime.component';
 import { AlternativeTitlesComponent } from './details-modal/alternative-titles/alternative-titles.component';
+import { ViewVideoComponent } from './details-modal/videos/view-video/view-video.component';
 
 const routes: Routes = [
   {
@@ -49,7 +50,8 @@ const routes: Routes = [
     VoiceActorComponent,
     StaffComponent,
     RelatedAnimeComponent,
-    AlternativeTitlesComponent
+    AlternativeTitlesComponent,
+    ViewVideoComponent
   ],
   declarations: [
     SchedulePage,
@@ -64,7 +66,8 @@ const routes: Routes = [
     VoiceActorComponent,
     StaffComponent,
     RelatedAnimeComponent,
-    AlternativeTitlesComponent
+    AlternativeTitlesComponent,
+    ViewVideoComponent
   ],
   providers: [
     AnimeService
