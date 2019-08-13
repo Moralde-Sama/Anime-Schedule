@@ -87,6 +87,13 @@ export class AnimeStaff {
     position: string[];
 }
 
+export class RelatedAnime {
+    mal_id: number;
+    name: string;
+    type: string;
+    url: string;
+}
+
 export type TodayRelease = {
     weekday: string,
     anime: Anime[] 

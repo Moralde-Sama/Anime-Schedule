@@ -1,0 +1,15 @@
+<ion-col size="12" *ngFor="let key of related_anime_keys; let i = index">
+  <div class="section-container">
+      <h5 class="section-title">{{key}}</h5>
+      <p class="section-description">
+        <ion-list>
+          <ion-item>
+            <ion-label text-wrap text-center *ngFor="let related of animedetails.related[key]">
+              <h2>{{related.name}}</h2>
+              <h4>{{related.type}}</h4>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </p>
+  </div>
+</ion-col>
