@@ -10,7 +10,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
   selector: 'app-videos',
   templateUrl: './videos.component.html',
   styleUrls: ['./videos.component.scss'],
-  providers: [AnimeService]
+  providers: [AnimeService, ScreenOrientation]
 })
 export class VideosComponent implements OnInit {
 
