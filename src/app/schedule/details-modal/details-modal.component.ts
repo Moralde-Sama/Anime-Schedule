@@ -32,7 +32,6 @@ export class DetailsModalComponent implements OnInit {
   }
 
   segmentChanged(ev: any): void {
-    console.log(ev['detail']['value']);
     this.selected_segment = ev['detail']['value'];
   }
 

@@ -12,7 +12,6 @@ export class RelatedAnimeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.animedetails.related);
     this.related_anime_keys = Object.keys(this.animedetails.related);
   }
 

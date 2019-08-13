@@ -26,6 +26,9 @@
                 <ion-segment-button value="Statistics">
                   <ion-label>Statistics</ion-label>
                 </ion-segment-button>
+                <ion-segment-button value="AT">
+                  <ion-label>Alternative Titles</ion-label>
+                </ion-segment-button>
                 <ion-segment-button value="RA">
                   <ion-label>Related Anime</ion-label>
                 </ion-segment-button>
@@ -51,6 +54,10 @@
           *ngIf="isSegmentSelected('Statistics')"
           [animedetails]="anime_details_input">
         </app-statistics>
+        <app-alternative-titles
+          *ngIf="isSegmentSelected('AT')"
+          [animedetails]="anime_details">
+        </app-alternative-titles>
         <app-related-anime
           *ngIf="isSegmentSelected('RA')"
           [animedetails]="anime_details">

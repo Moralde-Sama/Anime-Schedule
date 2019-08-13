@@ -1,0 +1,28 @@
+<ion-col size="12">
+    <div class="section-container">
+        <h5 class="section-title">Synonyms</h5>
+        <p class="section-description">
+           <ion-list>
+             <ion-item text-wrap text-center *ngFor="let synonym of animedetails.title_synonyms">
+               {{synonym}}
+             </ion-item>
+           </ion-list>
+        </p>
+    </div>
+</ion-col>
+<ion-col size="12" *ngIf="animedetails.title_japanese">
+    <div class="section-container">
+        <h5 class="section-title">Japanese</h5>
+        <p class="section-description">
+           {{animedetails.title_japanese}}
+        </p>
+    </div>
+</ion-col>
+<ion-col size="12" *ngIf="animedetails.title_english">
+    <div class="section-container">
+        <h5 class="section-title">English</h5>
+        <p class="section-description">
+           {{animedetails.title_english}}
+        </p>
+    </div>
+</ion-col>
