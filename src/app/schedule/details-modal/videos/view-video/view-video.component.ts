@@ -12,6 +12,8 @@ export class ViewVideoComponent implements OnInit {
 
   video_url: string;
   video_title: string;
+  is_video_loaded: boolean = false;
+  count_load: number = 0;
   constructor(private modal_ctrl: ModalController, private nav_param: NavParams,
     private screen_orientation: ScreenOrientation) {
     this.screen_orientation.lock(this.screen_orientation.ORIENTATIONS.LANDSCAPE)
@@ -22,12 +24,16 @@ export class ViewVideoComponent implements OnInit {
     this.video_title = this.nav_param.get('video_title');
   }
 
-  ngOnDestroy(): void {
-    this.screen_orientation.unlock();
-  }
-
   closeModal(): void {
     this.modal_ctrl.dismiss();
+  }
+
+  onLoad(): void {
+    if(this.count_load > 0) {
+      this.is_video_loaded = true;
+    } else {
+      this.count_load++;
+    }
   }
 
 }

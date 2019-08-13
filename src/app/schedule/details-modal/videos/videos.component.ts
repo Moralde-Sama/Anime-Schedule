@@ -4,6 +4,7 @@ import { Anime, AnimeVideos } from 'src/app/classes/anime';
 import { Storage } from '@ionic/storage';
 import { ModalController } from '@ionic/angular';
 import { ViewVideoComponent } from './view-video/view-video.component';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 @Component({
   selector: 'app-videos',
@@ -16,8 +17,8 @@ export class VideosComponent implements OnInit {
   @Input() animedetails: string;
   @Output() addedVideos = new EventEmitter<AnimeVideos[]>(true);
   anime_details: Anime;
-  constructor(public anime_service: AnimeService, public storage: Storage,
-    public modalCtrl: ModalController) { 
+  constructor(private anime_service: AnimeService, private storage: Storage,
+    private modalCtrl: ModalController, private screen_orientation: ScreenOrientation) { 
   }
 
   async ngOnInit() {
@@ -40,6 +41,10 @@ export class VideosComponent implements OnInit {
     });
 
     await modal.present();
+
+    if(await modal.onDidDismiss()) {
+      this.screen_orientation.unlock();
+    }
   }
 
   private async _updateAnimeDetails(animedetails: Anime): Promise<void> {
