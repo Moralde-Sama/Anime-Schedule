@@ -16,7 +16,7 @@
           <ion-card class="home-card" (click)="viewAnimeDetails(anime.mal_id)">
             <img [src]="anime.image_url"/>
             <h5 class="type">{{anime.type}}</h5>
-            <h5 class="score">{{anime.score}}</h5>
+            <h5 class="score" *ngIf="anime.score">{{anime.score}}</h5>
             <h3>{{anime.title}}
               <span *ngFor="let producer of anime.producers">
                 {{producer.name}}

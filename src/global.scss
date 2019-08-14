@@ -131,3 +131,10 @@ ion-content {
         font-size: .8rem;
     }
 }
+
+//ios segment label
+.sc-ion-segment-ios-h {
+    ion-label {
+        padding: 0 1rem;
+    }
+}

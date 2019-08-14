@@ -7,6 +7,8 @@ import * as moment from 'moment';
 import { DayTypeNum, WeekDays } from '../classes/enum/date';
 import { DetailsModalComponent } from './details-modal/details-modal.component';
 import { Subscription } from 'rxjs';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-schedule',
@@ -22,9 +24,11 @@ export class SchedulePage implements OnInit {
   _isoweekday: number;
   parsed_value_trelease: TodayRelease;
   backbutton_sub: Subscription;
-  constructor(public anime_service: AnimeService, public storage: Storage,
-    public loader: LoadingController, public picker_ctrl: PickerController,
-    public modal_ctrl: ModalController, public platform: Platform) { }
+  router_sub: Subscription;
+  constructor(private anime_service: AnimeService, private storage: Storage,
+    private loader: LoadingController, private picker_ctrl: PickerController,
+    private modal_ctrl: ModalController, private platform: Platform,
+    private router: Router) { }
 
   async ngOnInit() {
     this._isoweekday = moment().isoWeekday();
@@ -39,11 +43,13 @@ export class SchedulePage implements OnInit {
       await loader.dismiss();
     });
 
+    this._observeRouterChanges();
     this._initBackButton();
   }
 
   ngOnDestroy(): void {
     this.backbutton_sub.unsubscribe();
+    this.router_sub.unsubscribe();
   }
 
   async initTodayRelease(callback): Promise<void> {
@@ -168,6 +174,25 @@ export class SchedulePage implements OnInit {
     console.log('backbutton init');
     this.backbutton_sub = this.platform.backButton.subscribe(() => {
       navigator['app'].exitApp();
+    });
+  }
+
+  private _observeRouterChanges(): void {
+    this.router_sub = this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        console.log(event);
+        switch (event.url) {
+          case '/tabs/tab1':
+            this._initBackButton();
+            break;
+          case '/tabs/tab2':
+            this.backbutton_sub.unsubscribe();
+            break;
+          default:
+            this.backbutton_sub.unsubscribe();
+            break;
+        }
     });
   }
 
