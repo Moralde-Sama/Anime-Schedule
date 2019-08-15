@@ -175,7 +175,7 @@ export class SeasonsPage implements OnInit {
   private async _getPickerYears(): Promise<Object[]> {
     return new Promise((resolve) => {
       const year = moment().year() + 1;
-      const year_sub = year - 30;
+      const year_sub = year - 20;
       let year_array = [];
       for(let i = year; i > year_sub; i--) {
         year_array.push({
