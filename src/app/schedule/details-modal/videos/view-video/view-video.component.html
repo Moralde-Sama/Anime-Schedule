@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <iframe [src]="video_url | safevideo" (load)="onLoad()"  frameborder="0"></iframe>
+  <iframe [hidden]="!is_video_loaded" [src]="video_url | safevideo" (load)="onLoad()"  frameborder="0"></iframe>
   <div class="spinner" [hidden]="is_video_loaded">
       <ion-spinner name="lines" color="secondary"></ion-spinner>
   </div>

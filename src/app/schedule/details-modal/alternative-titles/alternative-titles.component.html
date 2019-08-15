@@ -3,8 +3,10 @@
         <h5 class="section-title">Synonyms</h5>
         <p class="section-description">
            <ion-list>
-             <ion-item text-wrap text-center *ngFor="let synonym of animedetails.title_synonyms">
-               {{synonym}}
+             <ion-item *ngFor="let synonym of animedetails.title_synonyms">
+               <ion-label text-wrap text-center>
+                    {{synonym}}
+               </ion-label>
              </ion-item>
            </ion-list>
         </p>
