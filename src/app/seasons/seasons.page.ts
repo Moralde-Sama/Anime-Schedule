@@ -24,6 +24,7 @@ export class SeasonsPage implements OnInit {
   season_show: string;
   backbutton_sub: Subscription;
   router_sub: Subscription;
+  anime_list_limit = 10;
   constructor(private seasons: Seasons, private anime_service: AnimeService,
     private storage: Storage, private loading_ctrl: LoadingController,
     private modal_ctrl: ModalController, private platform: Platform,
@@ -108,6 +109,15 @@ export class SeasonsPage implements OnInit {
     await picker.present();
   }
 
+  loadMoreAnime(ev: any) {
+    if(this.anime_list_limit < this.anime_list.length) {
+      this.anime_list_limit += 10;
+      ev.target.complete();
+    } else {
+      ev.target.disabled = true;
+    }
+  }
+
   private async _browseSeasonalAnime(year: number, season: string): Promise<void> {
     const loader = await this._initLoading();
     this.storage.get('current_season').then(async (value: CurrentSeason) => {
@@ -165,7 +175,7 @@ export class SeasonsPage implements OnInit {
   private async _getPickerYears(): Promise<Object[]> {
     return new Promise((resolve) => {
       const year = moment().year() + 1;
-      const year_sub = year - 80;
+      const year_sub = year - 30;
       let year_array = [];
       for(let i = year; i > year_sub; i--) {
         year_array.push({

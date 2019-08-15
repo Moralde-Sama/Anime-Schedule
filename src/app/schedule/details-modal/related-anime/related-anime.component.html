@@ -3,8 +3,8 @@
       <h5 class="section-title">{{key}}</h5>
       <p class="section-description">
         <ion-list>
-          <ion-item>
-            <ion-label text-wrap text-center *ngFor="let related of animedetails.related[key]">
+          <ion-item *ngFor="let related of animedetails.related[key]">
+            <ion-label text-wrap text-center>
               <h2>{{related.name}}</h2>
               <h4>{{related.type}}</h4>
             </ion-label>

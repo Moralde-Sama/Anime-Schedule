@@ -12,7 +12,7 @@
 <ion-content>
     <ion-grid fixed>
       <ion-row>
-        <ion-col size="6" *ngFor="let anime of anime_list">
+        <ion-col size="6" *ngFor="let anime of anime_list | slice: 0:anime_list_limit">
           <ion-card class="home-card" (click)="viewAnimeDetails(anime.mal_id)">
             <img [src]="anime.image_url"/>
             <h5 class="type">{{anime.type}}</h5>
@@ -26,4 +26,8 @@
         </ion-col>
       </ion-row>
     </ion-grid>
+    <ion-infinite-scroll threshold="25%" (ionInfinite)="loadMoreAnime($event)">
+      <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading more data...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </ion-content>

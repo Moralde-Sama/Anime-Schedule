@@ -18,6 +18,7 @@ import { filter } from 'rxjs/operators';
 export class SchedulePage implements OnInit {
 
   anime_list: Anime[];
+  anime_list_limit = 10;
   weekday: string;
   weekday_show: string;
   current_weekday: string;
@@ -50,6 +51,15 @@ export class SchedulePage implements OnInit {
   ngOnDestroy(): void {
     this.backbutton_sub.unsubscribe();
     this.router_sub.unsubscribe();
+  }
+
+  loadMoreAnime(ev: any) {
+    if(this.anime_list_limit < this.anime_list.length) {
+      this.anime_list_limit += 10;
+      ev.target.complete();
+    } else {
+      ev.target.disabled = true;
+    }
   }
 
   async initTodayRelease(callback): Promise<void> {
