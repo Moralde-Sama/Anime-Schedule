@@ -138,3 +138,10 @@ ion-content {
         padding: 0 1rem;
     }
 }
+
+//ion refresher
+ion-refresher {
+    &.refresher-ready, &.refresher-refreshing {
+        z-index: 1;
+    }
+}

@@ -62,7 +62,7 @@ export class SchedulePage implements OnInit {
     }
   }
 
-  async initTodayRelease(callback): Promise<void> {
+  async initTodayRelease(callback?: any): Promise<void> {
     this.storage.get('today_release').then(async (value) => {
     this.parsed_value_trelease = value;
     const is_weekday_not_same: boolean = 
@@ -70,17 +70,22 @@ export class SchedulePage implements OnInit {
 
       if(is_weekday_not_same) {
         const anime_list = await this.anime_service.getAnimeBySchedule(this.weekday.toLowerCase());
-        const today_release: TodayRelease = {
-          weekday: this.weekday,
-          anime: anime_list
+        if(anime_list !== 'Error') {
+          const today_release: TodayRelease = {
+            weekday: this.weekday,
+            anime: anime_list
+          }
+          await this.storage.remove('anime_details_history');
+          await this.storage.set('today_release', today_release);
+          this.anime_list = today_release.anime;
+        } else {
+          this.anime_list = [];
         }
-        await this.storage.remove('anime_details_history');
-        await this.storage.set('today_release', today_release);
-        this.anime_list = today_release.anime.filter((f) => f.score !== null);
       } else {
-        this.anime_list = this.parsed_value_trelease.anime.filter((f) => f.score !== null);
+        this.anime_list = this.parsed_value_trelease.anime;
       }
-      callback();
+      if(callback)
+        callback();
     });
   }
 
@@ -126,6 +131,12 @@ export class SchedulePage implements OnInit {
         this._initBackButton();
       }
       
+    });
+  }
+
+  async refreshTodaySched(ev): Promise<void> {
+    await this.initTodayRelease(() => {
+      ev.target.complete();
     });
   }
 

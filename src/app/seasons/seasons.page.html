@@ -10,6 +10,14 @@
 </ion-header>
 
 <ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="refreshTodaySched($event)">
+        <ion-refresher-content
+          pullingIcon="arrow-up"
+          pulling-text="Pull to refresh..."
+          refreshingSpinner="lines"
+          refreshingText="Please wait">
+        </ion-refresher-content>
+      </ion-refresher>
     <ion-grid fixed>
       <ion-row>
         <ion-col size="6" *ngFor="let anime of anime_list | slice: 0:anime_list_limit">

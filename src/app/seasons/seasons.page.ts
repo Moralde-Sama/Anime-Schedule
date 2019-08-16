@@ -32,7 +32,12 @@ export class SeasonsPage implements OnInit {
 
   async ngOnInit() {
     this._observeRouterChanges();
-    await this._initSeasonalAnime();
+
+    const loader = await this._initLoading();
+    await this._initSeasonalAnime().then(() => {
+      loader.dismiss();
+    });
+
     this.years = await this._getPickerYears();
   }
 
@@ -118,6 +123,12 @@ export class SeasonsPage implements OnInit {
     }
   }
 
+  refreshTodaySched(ev: any) {
+    this._initSeasonalAnime().then(() => {
+      ev.target.complete();
+    });
+  }
+
   private async _browseSeasonalAnime(year: number, season: string): Promise<void> {
     const loader = await this._initLoading();
     this.storage.get('current_season').then(async (value: CurrentSeason) => {
@@ -133,7 +144,6 @@ export class SeasonsPage implements OnInit {
   }
 
   private async _initSeasonalAnime(): Promise<void> {
-    const loader = await this._initLoading();
     const year = moment().year();
     const season = this.seasons.getCurrentSeason();
     this.year_show = year;
@@ -145,17 +155,20 @@ export class SeasonsPage implements OnInit {
         value == null ? false : value.season == season ? true : false;
       if(!is_season_valid) {
         const anime_list_seasonal = await this.anime_service.getSeasonalAnime(year, season);
-        const current_season: CurrentSeason = {
-          year: year,
-          season: season,
-          anime_list: anime_list_seasonal
-        } 
-        await this.storage.set('current_season', current_season);
-        this.anime_list = current_season.anime_list;
+        if(anime_list_seasonal !== 'Error') {
+          const current_season: CurrentSeason = {
+            year: year,
+            season: season,
+            anime_list: anime_list_seasonal
+          } 
+          await this.storage.set('current_season', current_season);
+          this.anime_list = current_season.anime_list;
+        } else {
+          this.anime_list = [];
+        }
       } else {
         this.anime_list = value.anime_list;
       }
-      await loader.dismiss();
     });
   }
 

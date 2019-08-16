@@ -14,9 +14,10 @@ export class AnimeService {
   async getAnimeBySchedule(weekday: string): Promise<any> {
     return new Promise((resolved) => {
       setTimeout(() => {
-        this.http.get(`https://api.jikan.moe/v3/schedule/${weekday}`).subscribe(result => {
-        resolved(result[weekday]);
-      });
+        this.http.get(`https://api.jikan.moe/v3/schedule/${weekday}`)
+        .subscribe(
+          result => resolved(result[weekday]),
+          () => resolved('Error'));
       }, 4000);
     });
   }
@@ -36,10 +37,12 @@ export class AnimeService {
       this._pending_request =
        this.http.get(`https://api.jikan.moe/v3/season/${year}/${season.toLowerCase()}`)
        .pipe(delay(4000))
-       .subscribe(value => {
+       .subscribe(
+         value => {
           resolve(value['anime']);
           this._pending_request.unsubscribe();
-       });
+         },
+         () => resolve('Error'));
     });
   }
 
