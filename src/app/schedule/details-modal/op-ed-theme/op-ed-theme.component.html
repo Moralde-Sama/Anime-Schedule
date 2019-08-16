@@ -1,16 +1,16 @@
-<ion-col size="12" *ngIf="anime_details.opening_themes > 0">
+<ion-col size="12" *ngIf="anime_details.opening_themes.length > 0">
     <div class="section-container">
         <h5 class="section-title">Opening Themes</h5>
-        <p class="section-description">
+        <div class="section-description">
            <ion-list>
              <ion-item text-wrap text-center *ngFor="let op of anime_details.opening_themes">
                {{op}}
              </ion-item>
            </ion-list>
-        </p>
+          </div>
     </div>
 </ion-col>
-<ion-col size="12" *ngIf="anime_details.ending_themes > 0">
+<ion-col size="12" *ngIf="anime_details.ending_themes.length > 0">
     <div class="section-container">
         <h5 class="section-title">Ending Themes</h5>
         <p class="section-description">

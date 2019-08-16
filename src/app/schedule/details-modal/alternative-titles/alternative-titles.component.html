@@ -1,7 +1,7 @@
 <ion-col size="12">
     <div class="section-container">
         <h5 class="section-title">Synonyms</h5>
-        <p class="section-description">
+        <div class="section-description">
            <ion-list>
              <ion-item *ngFor="let synonym of animedetails.title_synonyms">
                <ion-label text-wrap text-center>
@@ -9,7 +9,7 @@
                </ion-label>
              </ion-item>
            </ion-list>
-        </p>
+        </div>
     </div>
 </ion-col>
 <ion-col size="12" *ngIf="animedetails.title_japanese">
