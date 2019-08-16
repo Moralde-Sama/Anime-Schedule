@@ -135,6 +135,12 @@ export class SeasonsPage implements OnInit {
     this.renderer.setStyle(spinner_cont_element, 'display', 'none');
   }
 
+  animeImageFailed(ev: any, index: number): void {
+    console.log(ev);
+    const spinner_cont_element = document.querySelectorAll('div.spinner-container-season')[index];
+    this.renderer.setStyle(spinner_cont_element, 'display', 'none');
+  }
+
   private async _browseSeasonalAnime(year: number, season: string): Promise<void> {
     const loader = await this._initLoading();
     this.storage.get('current_season').then(async (value: CurrentSeason) => {

@@ -66,6 +66,11 @@ export class SchedulePage implements OnInit {
     const spinner_cont_element = document.querySelectorAll('div.spinner-container-sched')[index];
     this.renderer.setStyle(spinner_cont_element, 'display', 'none');
   }
+  animeImageFailed(ev: any, index: number): void {
+    console.log(ev);
+    const spinner_cont_element = document.querySelectorAll('div.spinner-container-sched')[index];
+    this.renderer.setStyle(spinner_cont_element, 'display', 'none');
+  }
 
   async initTodayRelease(callback?: any): Promise<void> {
     this.storage.get('today_release').then(async (value) => {

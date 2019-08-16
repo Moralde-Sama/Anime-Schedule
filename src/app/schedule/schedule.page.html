@@ -25,7 +25,7 @@
           <div class="spinner-container-sched">
             <ion-spinner color="primary" name="lines"></ion-spinner>
           </div>
-          <img [src]="anime.image_url" (load)="animeImageLoaded(i)"/>
+          <img [src]="anime.image_url" (error)="animeImageFailed($event, i)" (load)="animeImageLoaded(i)"/>
           <h5 class="type">{{anime.type}}</h5>
           <h5 class="score" *ngIf="anime.score">{{anime.score}}</h5>
           <h3>{{anime.title}}

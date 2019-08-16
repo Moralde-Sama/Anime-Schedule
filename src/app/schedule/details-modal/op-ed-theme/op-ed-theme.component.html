@@ -13,12 +13,12 @@
 <ion-col size="12" *ngIf="anime_details.ending_themes.length > 0">
     <div class="section-container">
         <h5 class="section-title">Ending Themes</h5>
-        <p class="section-description">
+        <div class="section-description">
            <ion-list>
              <ion-item text-wrap text-center *ngFor="let ed of anime_details.ending_themes">
                {{ed}}
              </ion-item>
            </ion-list>
-        </p>
+        </div>
     </div>
 </ion-col>
