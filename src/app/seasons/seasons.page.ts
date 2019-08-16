@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Seasons } from '../classes/seasons';
 import { AnimeService } from '../services/anime.service';
 import * as moment from 'moment';
@@ -28,7 +28,8 @@ export class SeasonsPage implements OnInit {
   constructor(private seasons: Seasons, private anime_service: AnimeService,
     private storage: Storage, private loading_ctrl: LoadingController,
     private modal_ctrl: ModalController, private platform: Platform,
-    private router: Router, private picker_ctrl: PickerController) { }
+    private router: Router, private picker_ctrl: PickerController,
+    private renderer: Renderer2) { }
 
   async ngOnInit() {
     this._observeRouterChanges();
@@ -127,6 +128,11 @@ export class SeasonsPage implements OnInit {
     this._initSeasonalAnime().then(() => {
       ev.target.complete();
     });
+  }
+
+  animeImageLoaded(index: number): void {
+    const spinner_cont_element = document.querySelectorAll('div.spinner-container-season')[index];
+    this.renderer.setStyle(spinner_cont_element, 'display', 'none');
   }
 
   private async _browseSeasonalAnime(year: number, season: string): Promise<void> {

@@ -80,6 +80,19 @@ ion-content {
     font-family: 'Roboto Mono', monospace;
     position: relative;
 
+    .spinner-container {
+        &-sched, &-season {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
     img {
         height: 17rem;
     }

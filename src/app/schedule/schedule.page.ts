@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { LoadingController, PickerController, ModalController, Platform } from '@ionic/angular';
 import { AnimeService } from '../services/anime.service'
@@ -29,7 +29,7 @@ export class SchedulePage implements OnInit {
   constructor(private anime_service: AnimeService, private storage: Storage,
     private loader: LoadingController, private picker_ctrl: PickerController,
     private modal_ctrl: ModalController, private platform: Platform,
-    private router: Router) { }
+    private router: Router, private renderer: Renderer2) { }
 
   async ngOnInit() {
     this._isoweekday = moment().isoWeekday();
@@ -53,13 +53,18 @@ export class SchedulePage implements OnInit {
     this.router_sub.unsubscribe();
   }
 
-  loadMoreAnime(ev: any) {
+  loadMoreAnime(ev: any): void {
     if(this.anime_list_limit < this.anime_list.length) {
       this.anime_list_limit += 10;
       ev.target.complete();
     } else {
       ev.target.disabled = true;
     }
+  }
+
+  animeImageLoaded(index: number): void {
+    const spinner_cont_element = document.querySelectorAll('div.spinner-container-sched')[index];
+    this.renderer.setStyle(spinner_cont_element, 'display', 'none');
   }
 
   async initTodayRelease(callback?: any): Promise<void> {

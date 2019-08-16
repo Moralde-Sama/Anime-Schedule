@@ -8,14 +8,27 @@
 }
 
 .anime-image {
+    position: relative;
     display: flex;
     justify-content: center;
     img {
-        background-color: var(--ion-color-primary);
+        height: 16rem;
+        // background-color: var(--ion-color-primary);
         padding: .2rem;
         border-radius: .3rem;
-        box-shadow: 2px 2px 2px rgba(0,0,0,.2);
+        box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
         width: 50%;
+    }
+
+    .spinner-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }
 

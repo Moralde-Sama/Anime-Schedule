@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams, ModalController, LoadingController } from '@ionic/angular';
+import { NavParams, ModalController } from '@ionic/angular';
 import { Anime, AnimeVideos, CharactersAndStaff } from 'src/app/classes/anime';
 
 @Component({
@@ -13,8 +13,8 @@ export class DetailsModalComponent implements OnInit {
   anime_details_input: string;
   loading: HTMLIonLoadingElement;
   selected_segment: string;
-  constructor(private nav_params: NavParams, private modal_ctrl: ModalController,
-    private loader: LoadingController) { 
+  is_anime_img_loaded = false;
+  constructor(private nav_params: NavParams, private modal_ctrl: ModalController) { 
       this.anime_details = this.nav_params.get('anime');
       this.anime_details_input = JSON.stringify(this.nav_params.get('anime'));
       console.log(this.anime_details);
@@ -50,12 +50,9 @@ export class DetailsModalComponent implements OnInit {
     console.log(this.anime_details);
   }
 
-  private async _presentLoading() {
-    const loader = await this.loader.create({
-      message: 'Please wait...'
-    });
-    await loader.present();
-    return loader;
+  animeImageLoaded(): void {
+    console.log('image loaded');
+    this.is_anime_img_loaded = true;
   }
 
 }

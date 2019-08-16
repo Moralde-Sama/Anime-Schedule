@@ -16,7 +16,10 @@
           </div>
         </ion-col>
         <ion-col class="anime-image" size="12">
-          <img [src]="anime_details.image_url"/>
+          <img [src]="anime_details.image_url" (load)="animeImageLoaded()"/>
+          <div class="spinner-container">
+            <ion-spinner [hidden]="is_anime_img_loaded" color="primary" name="lines"></ion-spinner>
+          </div>
         </ion-col>
         <ion-col size="12">
             <ion-segment (ionChange)="segmentChanged($event)" scrollable="true">
