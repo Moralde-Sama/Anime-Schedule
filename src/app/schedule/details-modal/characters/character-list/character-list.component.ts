@@ -12,6 +12,7 @@ export class CharacterListComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.animecharacters;
   }
 
 }

@@ -1,4 +1,4 @@
-<ion-list [hidden]="animecharacters">
+<ion-list *ngIf="animecharacters">
     <ion-item *ngFor="let character of animecharacters">
         <ion-avatar slot="start">
           <img [src]="character.image_url">
