@@ -17,7 +17,6 @@ export class DetailsModalComponent implements OnInit {
   constructor(private nav_params: NavParams, private modal_ctrl: ModalController) { 
       this.anime_details = this.nav_params.get('anime');
       this.anime_details_input = JSON.stringify(this.nav_params.get('anime'));
-      console.log(this.anime_details);
     }
 
   async ngOnInit() {
