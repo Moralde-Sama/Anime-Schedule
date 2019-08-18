@@ -76,12 +76,13 @@
         </app-op-ed-theme>
         <app-characters
           *ngIf="isSegmentSelected('CVA')"
-          [animedetails]="anime_details_input"
+          [animedetails]="anime_details"
           (animecharacters)="onAddedAnimeChar($event)">
         </app-characters>
         <app-staff
           *ngIf="isSegmentSelected('Staff')"
-          [animedetails]="anime_details">
+          [animedetails]="anime_details"
+          (animecharacters)="onAddedAnimeChar($event)">
         </app-staff>
         <ion-col size="12">
             <ion-button expand="block" fill="outline" (click)="viewOnMal(anime_details.url)">

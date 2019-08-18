@@ -38,8 +38,8 @@ export class Anime {
     opening_themes: string[];
     ending_themes: string[];
     videos: AnimeVideos[];
-    characters: AnimeCharacters;
-    staff: AnimeStaff;
+    characters: AnimeCharacters[];
+    staff: AnimeStaff[];
 }
 
 export class AnimeVideos {
@@ -106,6 +106,6 @@ export type CurrentSeason = {
 }
 
 export type CharactersAndStaff = {
-    characters: AnimeCharacters,
-    staff: AnimeStaff
+    characters: AnimeCharacters[],
+    staff: AnimeStaff[]
 };

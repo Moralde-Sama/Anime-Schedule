@@ -11,14 +11,14 @@
 <ion-col size="12">
     <app-character-list
         *ngIf="isSegmentSelected('Characters')"
-        [animecharacters]="anime_details.characters">
+        [animecharacters]="animedetails.characters">
     </app-character-list>
     <app-voice-actor
         *ngIf="isSegmentSelected('VA')"
-        [animecharacters]="anime_details.characters">
+        [animecharacters]="animedetails.characters">
     </app-voice-actor>
 </ion-col>
-<ion-col size="12" [hidden]="anime_details.characters">
+<ion-col size="12" [hidden]="animedetails.characters">
     <div text-center>
         <ion-spinner name="lines" color="secondary"></ion-spinner>
     </div>

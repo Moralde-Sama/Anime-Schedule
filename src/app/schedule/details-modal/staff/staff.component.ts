@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CharactersAndStaff, Anime } from 'src/app/classes/anime';
 import { AnimeService } from 'src/app/services/anime.service';
 import { Storage } from '@ionic/storage';
@@ -11,15 +11,17 @@ import { Storage } from '@ionic/storage';
 })
 export class StaffComponent implements OnInit {
   @Input() animedetails: Anime;
+  @Output() animecharacters = new EventEmitter<CharactersAndStaff>(true);
   constructor(public anime_service: AnimeService, public storage: Storage) { }
 
   async ngOnInit() {
-    if(this.animedetails.staff == null) {
+    if(this.animedetails.characters == null && this.animedetails.staff == null) {
       const char_and_staff: CharactersAndStaff = 
         await this.anime_service.getAnimeCharacters(this.animedetails.mal_id);
       this.animedetails.staff = char_and_staff.staff;
       this.animedetails.characters = char_and_staff.characters;
       await this._updateAnimeDetails(this.animedetails);
+      await this.animecharacters.emit(char_and_staff);
     }
   }
 

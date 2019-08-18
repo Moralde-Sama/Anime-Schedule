@@ -11,21 +11,19 @@ import { Storage } from '@ionic/storage';
 })
 export class CharactersComponent implements OnInit {
 
-  @Input() animedetails: string;
+  @Input() animedetails: Anime;
   @Output() animecharacters = new EventEmitter<CharactersAndStaff>(true);
-  anime_details: Anime;
   selected_segment: string;
   constructor(public anime_service: AnimeService, public storage: Storage) { }
 
   async ngOnInit() {
-    this.anime_details = JSON.parse(this.animedetails);
-    if(this.anime_details.characters == null) {
+    if(this.animedetails.characters == null && this.animedetails.staff == null) {
       const characters_and_staff: CharactersAndStaff =
-       await this.anime_service.getAnimeCharacters(this.anime_details.mal_id);
-      this.anime_details.characters = characters_and_staff.characters;
-      this.anime_details.staff = characters_and_staff.staff;
+       await this.anime_service.getAnimeCharacters(this.animedetails.mal_id);
+      this.animedetails.characters = characters_and_staff.characters;
+      this.animedetails.staff = characters_and_staff.staff;
       console.log(characters_and_staff);
-      await this._updateAnimeDetails(this.anime_details);
+      await this._updateAnimeDetails(this.animedetails);
       await this.animecharacters.emit(characters_and_staff);
     }
   }
