@@ -50,7 +50,8 @@ import { IonicStorageModule } from '@ionic/storage';
     IonicStorageModule
   ],
   entryComponents: [
-    DetailsModalComponent
+    DetailsModalComponent,
+    ViewVideoComponent
   ],
   providers: [
     AnimeService
