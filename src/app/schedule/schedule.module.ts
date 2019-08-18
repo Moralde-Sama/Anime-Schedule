@@ -6,6 +6,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { SchedulePage } from './schedule.page';
+import { IonicStorageModule } from '@ionic/storage';
+import { DetailsModalModule } from './details-modal/details-modal.module';
 
 const routes: Routes = [
   {
@@ -17,12 +19,11 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
-    IonicModule,
+    DetailsModalModule,
     RouterModule.forChild(routes)
   ],
   declarations: [
-    SchedulePage
+    SchedulePage,
   ]
 })
 export class SchedulePageModule {}
