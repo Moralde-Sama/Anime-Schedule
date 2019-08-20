@@ -158,3 +158,18 @@ ion-refresher {
         z-index: 1;
     }
 }
+
+//ion-item childs with ripples
+ion-item {
+    backface-visibility: hidden;
+}
+.ion-activatable {
+    &.relative {
+        position: relative;
+
+        ion-ripple-effect {
+            position: absolute;
+            z-index: 1;
+        }
+    }
+}

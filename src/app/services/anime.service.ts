@@ -3,9 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AnimeService {
 
   private _pending_request: Subscription;
@@ -25,9 +23,11 @@ export class AnimeService {
   async getAnimeDetails(mal_id: number): Promise<any> {
     return new Promise((resolved) => {
       setTimeout(() => {
-        this.http.get(`https://api.jikan.moe/v3/anime/${mal_id}/`).subscribe(result => {
-        resolved(result);
-      });
+        this.http.get(`https://api.jikan.moe/v3/anime/${mal_id}/`)
+        .subscribe(result => {
+          resolved(result);
+        },
+        () => resolved('Error'));
       }, 4000);
     });
   }

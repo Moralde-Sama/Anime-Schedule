@@ -33,12 +33,7 @@ export class SeasonsPage implements OnInit {
 
   async ngOnInit() {
     this._observeRouterChanges();
-
-    const loader = await this._initLoading();
-    await this._initSeasonalAnime().then(() => {
-      loader.dismiss();
-    });
-
+    await this._initSeasonalAnime();
     this.years = await this._getPickerYears();
   }
 
@@ -156,6 +151,7 @@ export class SeasonsPage implements OnInit {
   }
 
   private async _initSeasonalAnime(): Promise<void> {
+    const loader = await this._initLoading();
     const year = moment().year();
     const season = this.seasons.getCurrentSeason();
     this.year_show = year;
@@ -181,6 +177,7 @@ export class SeasonsPage implements OnInit {
       } else {
         this.anime_list = value.anime_list;
       }
+      await loader.dismiss();
     });
   }
 

@@ -4,10 +4,13 @@
       <p class="section-description">
         <ion-list>
           <ion-item *ngFor="let related of animedetails.related[key]">
-            <ion-label text-wrap text-center>
+            <div class="ion-activatable">
+              <ion-ripple-effect></ion-ripple-effect>
+              <ion-label text-wrap text-center>
               <h2>{{related.name}}</h2>
               <h4>{{related.type}}</h4>
             </ion-label>
+            </div>
           </ion-item>
         </ion-list>
       </p>

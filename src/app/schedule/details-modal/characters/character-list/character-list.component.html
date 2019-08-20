@@ -1,5 +1,7 @@
 <ion-list *ngIf="animecharacters">
-    <ion-item *ngFor="let character of animecharacters">
+  <div class="ion-activatable relative" *ngFor="let character of animecharacters">
+    <ion-ripple-effect></ion-ripple-effect>
+    <ion-item>
         <ion-avatar slot="start">
           <img [src]="character.image_url">
         </ion-avatar>
@@ -8,4 +10,5 @@
           <h3>{{character.role}}</h3>
         </ion-label>
       </ion-item>
+  </div>
 </ion-list>

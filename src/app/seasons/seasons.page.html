@@ -21,7 +21,8 @@
     <ion-grid fixed>
       <ion-row>
         <ion-col size="6" *ngFor="let anime of anime_list | slice: 0:anime_list_limit; let i = index">
-          <ion-card class="home-card" (click)="viewAnimeDetails(anime.mal_id)">
+          <ion-card class="home-card ion-activatable" (click)="viewAnimeDetails(anime.mal_id)">
+            <ion-ripple-effect></ion-ripple-effect>
             <div class="spinner-container-season">
               <ion-spinner color="primary" name="lines"></ion-spinner>
             </div>
