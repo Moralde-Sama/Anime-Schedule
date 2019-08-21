@@ -39,9 +39,10 @@ export class SchedulePage implements OnInit {
     this.weekday_show = DayTypeNum(this._isoweekday - 1);
     this.current_weekday = this.weekday_show;
 
+    await this.storage.remove('today_release');
     const loader = await this.presentLoading();
-    await this.initTodayRelease(async () => {
-      await loader.dismiss();
+    this.initTodayRelease().then(() => {
+      loader.dismiss();
     });
 
     this._observeRouterChanges();
@@ -72,31 +73,32 @@ export class SchedulePage implements OnInit {
     this.renderer.setStyle(spinner_cont_element, 'display', 'none');
   }
 
-  async initTodayRelease(callback?: any): Promise<void> {
-    this.storage.get('today_release').then(async (value) => {
-    this.parsed_value_trelease = value;
-    const is_weekday_not_same: boolean = 
-    value == null ? true : this.parsed_value_trelease.weekday != this.weekday ? true : false;
-
-      if(is_weekday_not_same) {
-        const anime_list = await this.anime_service.getAnimeBySchedule(this.weekday.toLowerCase());
-        if(anime_list !== 'Error') {
-          const today_release: TodayRelease = {
-            weekday: this.weekday,
-            anime: anime_list
+  async initTodayRelease(): Promise<void> {
+    return new Promise((resolve) => {
+      this.storage.get('today_release').then(async (value) => {
+        this.parsed_value_trelease = value;
+        const is_weekday_not_same: boolean = 
+        value == null ? true : this.parsed_value_trelease.weekday != this.weekday ? true : false;
+    
+          if(is_weekday_not_same) {
+            const anime_list = await this.anime_service.getAnimeBySchedule(this.weekday.toLowerCase());
+            if(anime_list !== 'Error') {
+              const today_release: TodayRelease = {
+                weekday: this.weekday,
+                anime: anime_list
+              }
+              await this.storage.remove('anime_details_history');
+              await this.storage.set('today_release', today_release);
+              this.anime_list = today_release.anime;
+            } else {
+              this.anime_list = [];
+            }
+          } else {
+            this.anime_list = this.parsed_value_trelease.anime;
           }
-          await this.storage.remove('anime_details_history');
-          await this.storage.set('today_release', today_release);
-          this.anime_list = today_release.anime;
-        } else {
-          this.anime_list = [];
-        }
-      } else {
-        this.anime_list = this.parsed_value_trelease.anime;
-      }
-      if(callback)
-        callback();
-    });
+          resolve();
+        });
+    })
   }
 
   async browseReleaseByWeekDay(weekday: string): Promise<void> {
@@ -144,10 +146,8 @@ export class SchedulePage implements OnInit {
     });
   }
 
-  async refreshTodaySched(ev): Promise<void> {
-    await this.initTodayRelease(() => {
-      ev.target.complete();
-    });
+  async refreshTodaySched(ev: any): Promise<void> {
+    this.initTodayRelease().then(() => ev.target.complete());
   }
 
   async presentLoading() {

@@ -32,9 +32,9 @@ export class SeasonsPage implements OnInit {
     private renderer: Renderer2) { }
 
   async ngOnInit() {
+    this._getPickerYears().then(value => this.years = value);
     this._observeRouterChanges();
-    await this._initSeasonalAnime();
-    this.years = await this._getPickerYears();
+    this._initSeasonalAnime();
   }
 
   ngOnDestroy(): void {
